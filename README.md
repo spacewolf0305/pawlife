@@ -1,36 +1,120 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 🐾 PawLife — Your Pet's Digital Home
 
-## Getting Started
+A full-stack pet care platform built with **Next.js**, **Supabase**, **Clerk**, and **Google Gemini AI**.
 
-First, run the development server:
+Track pet health, find lost pets, connect with the community, discover nearby services, and chat with an AI pet assistant — all in one beautifully designed app.
+
+![Next.js](https://img.shields.io/badge/Next.js-16-black?logo=next.js)
+![Supabase](https://img.shields.io/badge/Supabase-Database-3FCF8E?logo=supabase)
+![Clerk](https://img.shields.io/badge/Clerk-Auth-6C47FF?logo=clerk)
+![Gemini](https://img.shields.io/badge/Gemini_AI-PawBuddy-4285F4?logo=google)
+
+---
+
+## ✨ Features
+
+| Feature | Description |
+|---------|-------------|
+| 🐕 **Pet Profiles** | Register pets with breed, weight, DOB, microchip ID |
+| 🏥 **Health Tracker** | Log vaccines, checkups, medications with reminders |
+| 📍 **Lost & Found** | Report and find missing pets in your area |
+| 💬 **Community Feed** | Share pet moments, like posts (rate-limited) |
+| 🤖 **PawBuddy AI** | Gemini-powered chat assistant for pet health & care |
+| 🏪 **Services Directory** | Find vets, groomers, pet shops nearby |
+| 🛒 **Marketplace** | Browse pet food, toys, and accessories |
+| ⚙️ **Settings** | Profile, subscription, notifications, dark mode |
+
+## 🤖 PawBuddy AI
+
+A floating AI assistant on every dashboard page powered by **Google Gemini 2.5 Flash**:
+- Answers any pet health, nutrition, training, or care question
+- Knows your pets by name (fetches from Supabase)
+- 20+ topic fallback knowledge base when AI is unavailable
+- Automatic model fallback (2.5-flash → 2.0-flash → 1.5-flash)
+
+## 🛠️ Tech Stack
+
+- **Framework:** Next.js 16 (App Router + Turbopack)
+- **Auth:** Clerk (Google + Email sign-in)
+- **Database:** Supabase (PostgreSQL + Row Level Security)
+- **AI:** Google Gemini API (2.5 Flash)
+- **Styling:** Custom CSS design system (Inter + Outfit fonts)
+- **Deployment:** Vercel
+
+## 🚀 Getting Started
+
+### Prerequisites
+- Node.js 18+
+- Supabase project
+- Clerk application
+- Google AI API key (free at [aistudio.google.com](https://aistudio.google.com))
+
+### Setup
 
 ```bash
+# Clone the repo
+git clone https://github.com/spacewolf0305/pawlife.git
+cd pawlife
+
+# Install dependencies
+npm install
+
+# Create .env.local with your keys
+cp .env.example .env.local
+# Edit .env.local with your actual keys
+
+# Run development server
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### Environment Variables
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+Create a `.env.local` file:
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```env
+# Supabase
+NEXT_PUBLIC_SUPABASE_URL=your_supabase_url
+NEXT_PUBLIC_SUPABASE_ANON_KEY=your_supabase_anon_key
 
-## Learn More
+# Clerk
+NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY=your_clerk_key
+CLERK_SECRET_KEY=your_clerk_secret
+NEXT_PUBLIC_CLERK_SIGN_IN_URL=/sign-in
+NEXT_PUBLIC_CLERK_SIGN_UP_URL=/sign-up
+NEXT_PUBLIC_CLERK_AFTER_SIGN_IN_URL=/dashboard
+NEXT_PUBLIC_CLERK_AFTER_SIGN_UP_URL=/dashboard
 
-To learn more about Next.js, take a look at the following resources:
+# Google AI (PawBuddy)
+GOOGLE_AI_API_KEY=your_gemini_api_key
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## 📁 Project Structure
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+```
+pawlife/
+├── app/
+│   ├── page.js              # Landing page
+│   ├── layout.js             # Root layout (Clerk + fonts)
+│   ├── globals.css           # Design system
+│   ├── api/chat/route.js     # PawBuddy AI API
+│   └── dashboard/
+│       ├── layout.js         # Sidebar + topbar
+│       ├── page.js           # Dashboard home
+│       ├── PawBuddy.js       # AI chat widget
+│       ├── ErrorBoundary.js  # Error handling
+│       ├── pets/             # Pet profiles
+│       ├── health/           # Health tracker
+│       ├── social/           # Community feed
+│       ├── lost-found/       # Lost & found
+│       ├── services/         # Services directory
+│       ├── marketplace/      # Pet marketplace
+│       └── settings/         # User settings
+├── lib/
+│   ├── supabase.js           # Supabase client
+│   └── utils.js              # Helper functions
+└── middleware.js              # Route protection
+```
 
-## Deploy on Vercel
+## 📄 License
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+MIT © [spacewolf0305](https://github.com/spacewolf0305)
